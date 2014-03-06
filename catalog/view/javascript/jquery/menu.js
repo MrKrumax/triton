@@ -1,0 +1,19 @@
+
+function initMenu() {
+  $('#menu2 ul').hide();
+  $('#menu2 ul:first').show();
+  $('#menu2 li a').click(
+    function() {
+      var checkElement = $(this).next();
+      if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+        return false;
+        }
+      if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+        $('#menu2 ul:visible').slideUp('normal');
+        checkElement.slideDown('normal');
+        return false;
+        }
+      }
+    );
+  }
+$(document).ready(function() {initMenu();});

@@ -1,0 +1,88 @@
+<modification>
+	<id>Popup Cart Module</id>
+	<version>1.5.3.x</version>
+	<vqmver>2.1.2</vqmver>
+	<author>shishifr</author>
+	<file name="catalog/view/theme/default/template/checkout/cart.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+			<div class="success">
+			]]></search>
+			<add><![CDATA[
+			<div class="rev-success">
+			]]></add>
+		</operation>
+		</file>
+
+	<file name="catalog/view/theme/default/template/product/product.tpl">
+		<operation>
+			<search position="replace" offset="10"><![CDATA[
+			if (json['success']) {
+			]]></search>
+			<add><![CDATA[
+			if (json['success']) {
+				html = '';				
+				
+				html += '<div class="cart-box-succ-img"><img src="catalog/view/theme/default/image/success1.png"></div>';
+				html +=	'<div class="cart-box-succ-det">' + json['success'] + '</div>';
+				html += '<div id="cart-box-list"></div>' + '<div id="cart-box-total"></div>';
+				html +=	'<div class="popup-buttons"><div class="left"><a href="index.php?route=checkout/simplecheckout" class="button"><span>Корзина</span></a></div><div class="center"><a alt="Закрыть и продолжить" onclick="closeCart();" title="Close &amp; Continue" class="button"><span>Продолжить</span></a></div><div class="right"><a href="index.php?route=checkout/simplecheckout" class="button"><span>Оформить</span></a></div></div>';
+				}
+				$('#cart-success').html('<div class="cart-conf-popup" style="display:none;">' + html + '</div>');
+				$('#cart-box-list').load('index.php?route=module/cart .mini-cart-info > *');
+				$('#cart-box-total').load('index.php?route=module/cart .mini-cart-total > *');
+				var opaclayerHeight = $(document).height();
+				var opaclayerWidth = $(window).width();
+				$('#opaclayer').css('height', opaclayerHeight);
+				var winH = $(window).height();
+				var winW = $(window).width();
+				$('.cart-conf-popup').css('top',  winH/2-$('.cart-conf-popup').height()/2);
+				$('.cart-conf-popup').css('left', winW/2-$('.cart-conf-popup').width()/2);				
+				$('#opaclayer').fadeTo(500,0.8);
+				$('.cart-conf-popup').fadeIn(500); 					
+				$('#cart-total').html(json['total']);
+				
+		}
+
+	});
+
+			]]></add>
+		</operation>
+		
+
+	</file>
+
+	<file name="catalog/view/theme/default/template/common/header.tpl">
+		<operation>
+		    <search position="before"><![CDATA[
+			</head>
+			]]></search>
+			<add><![CDATA[
+			<link rel="stylesheet" type="text/css" href="catalog/view/theme/default/stylesheet/stylesheet2.css" />
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[
+			<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+			]]></search>
+			<add><![CDATA[
+			<script type="text/javascript" src="catalog/view/javascript/common2.js"></script>
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[<div id="container">]]></search>
+			<add><![CDATA[<div id="opaclayer" onclick="closeCart();"></div>]]></add>
+		</operation>	
+
+		<operation>
+			<search position="after"><![CDATA[
+			<div id="container">
+			]]></search>
+			<add><![CDATA[
+			<div id="cart-success"></div>
+			]]></add>
+		</operation>
+	</file>
+</modification>

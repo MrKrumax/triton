@@ -1,0 +1,172 @@
+<modification>
+<!-- @system: info -->
+<id>SMSC.RU</id>
+<version>1.5.3.1</version>
+<vqmver>2.1.6</vqmver>
+<author>SMSC.RU</author>
+
+<!-- @system: init -->
+<file name="system/engine/controller.php">
+	<operation>
+	<search position="before"><![CDATA[public function __construct($registry) {]]></search>
+	<add>
+		<![CDATA[
+		// [BEGIN]
+
+		protected function oc_smsc_init() {
+
+				// Load language
+				$this->load->language('module/oc_smsc');
+
+				// Load OC SMSC library
+				require_once(DIR_SYSTEM . 'library/oc_smsc/gateway.php');
+
+				$oc_smsc_gateway = new OCSMSCGateway();
+
+				// Add to global registry
+				$this->registry->set('oc_smsc_gateway', $oc_smsc_gateway);
+
+				return true;
+		}
+		// [END]
+		]]>
+	</add>
+	</operation>
+</file>
+
+<!-- @system: models -->
+<file name="admin/model/sale/order.php">
+	<operation>
+	<search position="before"><![CDATA[public function getTotalOrderHistoriesByOrderStatusId($order_status_id) {]]></search>
+	<add>
+		<![CDATA[
+			// [BEGIN]
+
+			public function getStatusName($order_status_id) {
+			$query = $this->db->query("SELECT name FROM order_status WHERE order_status_id = '" . (int)$order_status_id . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "' LIMIT 1");
+
+			return $query->row['name'];
+			}
+			// [END]
+		]]>
+	</add>
+	</operation>
+</file>
+
+<!-- @admin: received new message -->
+<file name="catalog/controller/information/contact.php">
+	<operation>
+	<search position="before"><![CDATA[$this->redirect($this->url->link('information/contact/success'));]]></search>
+	<add>
+		<![CDATA[
+			// [BEGIN]
+
+			if (true === $this->oc_smsc_init() && $this->config->get('oc_smsc_admin_new_email')) {
+
+				$this->oc_smsc_gateway->send($this->config->get('oc_smsc_login'), $this->config->get('oc_smsc_password'),
+													$this->config->get('config_telephone'), $this->language->get('oc_smsc_message_admin_new_email'),
+													$this->config->get('oc_smsc_signature'));
+			}
+			// [END]
+		]]>
+	</add>
+	</operation>
+</file>
+
+<!-- @admin: new member is registered & @customer: congratulations -->
+<file name="catalog/controller/account/register.php">
+	<operation>
+	<search position="before"><![CDATA[$this->redirect($this->url->link('account/success'));]]></search>
+	<add>
+		<![CDATA[
+			// [BEGIN]
+			if (true === $this->oc_smsc_init() && $this->config->get('oc_smsc_admin_new_customer')) {
+
+				$this->oc_smsc_gateway->send($this->config->get('oc_smsc_login'), $this->config->get('oc_smsc_password'),
+													$this->config->get('config_telephone'), $this->language->get('oc_smsc_message_admin_new_customer'),
+													$this->config->get('oc_smsc_signature'));
+			}
+
+			if (true === $this->oc_smsc_init() && $this->config->get('oc_smsc_customer_new_register')) {
+
+				$this->oc_smsc_gateway->send($this->config->get('oc_smsc_login'), $this->config->get('oc_smsc_password'),
+													$this->request->post['telephone'], sprintf($this->language->get('oc_smsc_message_customer_new_register'),
+													$this->config->get('config_name')), $this->config->get('oc_smsc_signature'));
+			}
+			// [END]
+		]]>
+	</add>
+	</operation>
+</file>
+<file name="catalog/controller/checkout/register.php">
+	<operation>
+	<search position="after"><![CDATA[$this->model_account_customer->addCustomer($this->request->post);]]></search>
+	<add>
+		<![CDATA[
+			// [BEGIN]
+
+			if (true === $this->oc_smsc_init() && $this->config->get('oc_smsc_admin_new_customer')) {
+
+				$this->oc_smsc_gateway->send($this->config->get('oc_smsc_login'), $this->config->get('oc_smsc_password'),
+													$this->config->get('config_telephone'), $this->language->get('oc_smsc_message_admin_new_customer'),
+													$this->config->get('oc_smsc_signature'));
+			}
+
+			if (true === $this->oc_smsc_init() && $this->config->get('oc_smsc_customer_new_register')) {
+
+				$this->oc_smsc_gateway->send($this->config->get('oc_smsc_login'), $this->config->get('oc_smsc_password'),
+													$this->request->post['telephone'], sprintf($this->language->get('oc_smsc_message_customer_new_register'),
+													$this->config->get('config_name')), $this->config->get('oc_smsc_signature'));
+			}
+			// [END]
+		]]>
+	</add>
+	</operation>
+</file>
+
+<!-- @admin: new order is available -->
+<file name="catalog/controller/checkout/confirm.php">
+	<operation>
+	<search position="after"><![CDATA[$this->session->data['order_id'] = $this->model_checkout_order->addOrder($data);]]></search>
+	<add>
+		<![CDATA[
+			// [BEGIN]
+
+			if (true === $this->oc_smsc_init() && $this->config->get('oc_smsc_admin_new_order')) {
+
+				$this->oc_smsc_gateway->send($this->config->get('oc_smsc_login'), $this->config->get('oc_smsc_password'),
+													$this->config->get('config_telephone'), $this->language->get('oc_smsc_message_admin_new_order'),
+													$this->config->get('oc_smsc_signature'));
+			}
+			// [END]
+		]]>
+	</add>
+	</operation>
+</file>
+
+<!-- @customer: new order status is available -->
+<file name="admin/controller/sale/order.php">
+	<operation>
+	<search position="before"><![CDATA[$this->model_sale_order->addOrderHistory($this->request->get['order_id'], $this->request->post);]]></search>
+	<add>
+		<![CDATA[
+			// [BEGIN]
+
+			if (true === $this->oc_smsc_init() && $this->config->get('oc_smsc_customer_new_order_status') && $this->request->post['notify']) {
+
+				$last_order = $this->model_sale_order->getOrder($this->request->get['order_id']);
+
+				if ($last_order['order_status_id'] != $this->request->post['order_status_id']) {
+
+					$this->oc_smsc_gateway->send($this->config->get('oc_smsc_login'), $this->config->get('oc_smsc_password'),
+													$last_order['telephone'], sprintf($this->language->get('oc_smsc_message_customer_new_order_status'),
+													$this->request->get['order_id'], $this->model_sale_order->getStatusName($this->request->post['order_status_id'])),
+													$this->config->get('oc_smsc_signature'));
+				}
+			}
+			// [END]
+		]]>
+	</add>
+	</operation>
+</file>
+</modification>

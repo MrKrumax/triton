@@ -1,0 +1,35 @@
+<modification>
+	<id>AutoComplete</id>
+	<version>1.0</version>
+	<vqmver>2.1.7</vqmver>
+	<author>kbr team</author>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation>
+			<search position="before"><![CDATA[
+			<?php echo $google_analytics; ?>
+			]]></search>
+			<add><![CDATA[
+			<script type="text/javascript" src="catalog/view/javascript/autocomplete/jquery.autocomplete.js"></script>
+			<script type="text/javascript" src="index.php?route=product/productall&limit=1000000"></script>
+			<script type="text/javascript" src="catalog/view/javascript/autocomplete/foxycomplete.js"></script>
+			<link rel="stylesheet" type="text/css" href="catalog/view/javascript/autocomplete/style.css" />
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[
+			<input type="text" name="filter_name" value="<?php echo $filter_name; ?>" />
+			]]></search>
+			<add><![CDATA[
+			<input type="text" name="filter_name" id="s" value="<?php echo $filter_name; ?>" />
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[
+			<input type="text" name="filter_name" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
+			]]></search>
+			<add><![CDATA[
+			<input type="text" name="filter_name" id="s" value="<?php echo $text_search; ?>" onclick="this.value = '';" onkeydown="this.style.color = '#000000';" />
+			]]></add>
+		</operation>
+	</file>
+</modification>

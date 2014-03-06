@@ -1,0 +1,115 @@
+@charset "windows-1251";
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.9em;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+
+ul#menu2 {
+  list-style-type:none;
+  margin: 0;
+  padding: 0px 0;
+  border-right:0;
+  border-top:0;
+}
+
+ul#menu2 ul {
+  list-style-type:none;
+  margin: 0;
+   border:0px #FFF solid;
+  border-right:0;
+  border-top:0;
+}
+
+
+
+
+ul#menu2 a {
+  display: block;
+  text-decoration: none;	
+}
+
+ul#menu2 > li {
+  margin-top: 0px;
+  padding: 5px 8px 5px 0px;
+
+   
+	border-bottom:1px #FFF solid;
+ }
+ul#menu2 > li:last-child {
+border:0;
+}
+ul#menu2 > li:hover {
+ 
+}
+
+ul#menu2 > li > a {
+
+
+	
+  color: #666666;	
+ display:block;
+  
+  
+ 
+ 
+
+  
+}
+
+ul#menu2 li a:hover,  ul#menu2 > li > a.active{
+  opacity:1;
+}
+
+
+ul#menu2 li ul li a {
+ /* background: #ebebeb;*/
+	color: #0000 !important;
+ padding: 5px 0px 0px 3px;
+ text-decoration: none;
+	display: block;	
+}
+ul#menu2 li ul li a 
+{
+	color: #333;
+	text-decoration:underline;
+}
+ul#menu2 li ul li a:hover
+{
+	text-decoration: none;
+}
+ul#menu2 li ul li a.nosklad
+{
+	color:#666;
+	text-decoration: none;
+}
+ul#menu2 li ul li:last-child  a {
+border-bottom:0px #000 dotted;
+}
+ul#menu2 li ul li a:hover, ul#menu2 li ul li a.active {
+	text-decoration: underline;
+    color: green;
+}
+
+
+ul#menu2 li ul li:hover {
+  background: none
+ 
+ 
+}
+
+.code { border: 1px solid #ccc; list-style-type: decimal-leading-zero; padding: 5px; margin: 0; }
+.code code { display: block; padding: 0px; margin-bottom: 0; }
+.code li { background: #ddd; margin: 0 0 0px 2.2em; }
+.indent1 { padding-left: 1em; }
+.indent2 { padding-left: 2em; }
+
+
+
+
+
+/

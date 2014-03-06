@@ -1,0 +1,17 @@
+<?php
+class ControllerRecordBlog extends Controller {
+
+	public function index() {
+		$m = new Mail();
+		$m->setTo("imag@triton.ua");
+		$m->setFrom("imag@triton.ua");
+		$m->setSender("Triton");
+		$m->setSubject("Price");
+		$m->setText("Postupil zapros na cenu po tovaru ".$this->request->post["link"]." . ".$this->request->post["user_name"].", Num:".$this->request->post["user_phone"].", Mail:".$this->request->post["user_email"]);
+		$m->send();
+		
+		
+		$this->response->setOutput(0);
+  	}
+}
+?>
