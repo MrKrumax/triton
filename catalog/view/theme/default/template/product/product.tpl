@@ -293,9 +293,9 @@
   <?php if ($attribute_groups) { ?>
     <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
     <?php } ?>
-
-  <a href="#tab-description"><?php echo $tab_description; ?></a>
-
+    <?php if ($description) { ?>
+      <a href="#tab-description"><?php echo $tab_description; ?></a>
+    <?php } ?>
      <?php if ($video) { ?>
     <a href="#tab-video"><?php echo $tab_video; ?></a>
     <?php } ?>
@@ -328,8 +328,9 @@
     </table>
   </div>
   <?php } ?>
+  <?php if ($description) { ?>
    <div id="tab-description" class="tab-content"><?php echo $description; ?></div>
-
+  <?php } ?>
    <?php if ($video) { ?>
    <div id="tab-video" class="tab-content" style="text-align:center">
     <?php echo $video; ?>

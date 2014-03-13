@@ -31,110 +31,85 @@ class ControllerPaymentukrsib extends Controller {
 	public function send() {
 		$json = array();
 
-
 		//xml
 		$this->load->model('checkout/order');
-		
 				
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+        $arrComment = explode('<br>', $order_info['comment']);
 
-		if ($order_info) {	
+		if ($order_info) {
+            $goodslist = array();
+            $this->load->model('catalog/product');
+            $this->load->model('catalog/category');
 	        $login = $this->config->get('ukrsib_login');
 	        $pass  = $this->config->get('ukrsib_pass');
-			$xml="<?xml version='1.0' encoding='UTF-8'?>\n
-					<order xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='ecom-application-form.xsd'>\n";
-			$xml.="<login>".$login."</login>\n";
-			$xml.="<pwd>".$pass."</pwd>\n";
-			$xml.="<orderid>".$this->session->data['order_id']."</orderid>\n";
-			$xml.="<totalsum>".round($order_info['total'],2)."</totalsum>\n";
-				$xml.="<personinfo>\n";
-				$xml.="<downpayment>".round(($order_info['total']*0.1),2)."</downpayment>\n";
-				$xml.="</personinfo>\n";
-				$xml.="<goods>\n";
 
-			
-
+            $xml = '<?xml version="1.0" encoding="UTF-8" ?>
+                    <order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ecom-application-form.xsd">
+                        <login>' . $login . '</login>
+                        <pwd>' . $pass . '</pwd>
+                        <orderid>' . $this->session->data['order_id'] . '</orderid>
+                        <totalsum>' . round($order_info['total'],2) . '</totalsum>
+                        <personinfo>
+                            <surname>' . $order_info['lastname'] . '</surname>
+                            <first_name>' . $order_info['firstname'] . '</first_name>
+                            <patronymic_name>' . $arrComment[0] . '</patronymic_name>
+                        <tin>' . trim($arrComment[2]) . '</tin>
+                        <birthday>' . trim($arrComment[1]) . '</birthday>
+                        <email>' . $order_info['email'] . '</email>
+                        <mobile_phone>' . substr($order_info['telephone'], 3) . '</mobile_phone>
+                        </personinfo>
+                        <goods>
+                        ';
 
 				// Products
-				$goodslist = array();
-				$this->load->model('catalog/product');
-				$this->load->model('catalog/category');	
+
 				foreach ($this->cart->getProducts() as $product) {
-					//print_r($product);
-					$cats = $this->model_catalog_product->getCategories($product['product_id']);
-					$cat = end($cats);
-					$category_info = $this->model_catalog_category->getCategory($cat['category_id']);
-					//$product_info = $this->model_catalog_product->getProduct($product['product_id']);
-					//print_r($cats);
-					$xml.="<good>
-								<id>".$product['product_id']."</id>
-								<classificationid>".$category_info['category_id']."</classificationid>
-								<classificationname>".$category_info['name']."</classificationname>
-								<name>".$product['name']."</name>
-								<price>".$product['price']."</price>
-								<amount>".$product['quantity']."</amount>
-							</good>\n";
-					/*$goodslist[] = array(
-						'qty'   => $product['quantity'],
-						'goods' => array(
-							'artno'    => $product['model'],
-							'title'    => $product['name'],
-							'price'    => (int)str_replace('.', '', $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),
-							'vat'      => (float)str_replace('.', '', $this->currency->format($this->tax->getTax($product['price'], $product['tax_class_id']), $order_info['currency_code'], false, false)),	
-							'discount' => 0,   
-							'flags'    => 32
-						)	
-					);
-					*/
+                    $cats = $this->model_catalog_product->getCategories($product['product_id']);
+                    $cat = end($cats);
+                    $category_info = $this->model_catalog_category->getCategory($cat['category_id']);
+                    //$product_info = $this->model_catalog_product->getProduct($product['product_id']);
+                    //print_r($cats);
+                    $xml.="<good>
+                            <id>".$product['product_id']."</id>
+                            <classificationid>".$category_info['category_id']."</classificationid>
+                            <classificationname>".$category_info['name']."</classificationname>
+                            <name>".$product['name']."</name>
+                            <price>".$product['price']."</price>
+                            <amount>".$product['quantity']."</amount>
+					      </good>
+							";
 				}
 				$xml.="</goods>\n";
-			//echo var_dump($xml);
-			/*<goods>
-					<good>
-						<id>1234</id>
-						<classificationid>2345</classificationid>
-						<classificationname>привет</classificationname>
-						<name>Samsung 45PF</name>
-						<price>3089.51</price>
-						<amount>1</amount>
-					</good>
-				</goods>*/
 			$xml.="</order>";
 
 			$this->data['xml'] =  ($xml);
 
-//echo $xml;
-
-			//$request = xmlrpc_encode_request('add_invoice', $data);
-//die('asd');
 			error_reporting(E_ALL);
 			ini_set('show_errors', true);
 
-			$url = 'ratanet.ukrsibbank.com';
-			$header  = 'Host: ' . $url . "\r\n";	
+            $url = 'ratanet-backup.ukrsibbank.com';
+			$header  = 'Host: ' . $url . "\r\n";
 
 			$header .= 'Accept	text/plain, */*; q=0.01' . "\r\n";
-			$header .= 'Accept-Encoding	gzip, deflate' . "\r\n";			
+			$header .= 'Accept-Encoding	gzip, deflate' . "\r\n";
 			$header .= 'Connection: close' . "\r\n";
 			$header .= 'Content-Type: text/xml; charset=UTF-8' . "\r\n";
 			//$header .= 'Content-Length: ' . strlen($xml) . "\r\n";
 
-			
-			$curl = curl_init('https://'.$url.'/coliseum/jsp/ecom_logon.jsf');// . $url);
+			$curl = curl_init();
 
-			
-			curl_setopt($curl, CURLOPT_HTTPHEADER , array (
-		        'Host: ' . $url,
-		        'Accept	text/plain, */*; q=0.01',
-		        'Accept-Encoding	gzip, deflate',
-		        'Connection: close',
-		        'Content-Type: text/xml; charset=UTF-8'
-		    ));
-			curl_setopt($curl, CURLOPT_POST, true);
-			curl_setopt($curl, CURLOPT_POSTFIELDS, $xml);
-			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($curl, CURLOPT_FOLLOWLOCATION,true); 
+            curl_setopt($curl, CURLOPT_URL, 'https://ratanet-backup.ukrsibbank.com/coliseum/jsp/ecommerce');
+            curl_setopt($curl, CURLOPT_FAILONERROR,true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            //curl_setopt($curl, CURLOPT_FOLLOWLOCATION,true);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, Array('Content-Type: text/xml; charset=UTF-8'));
+            curl_setopt($curl, CURLOPT_POSTFIELDS,$xml);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+            curl_setopt($curl, CURLOPT_PROXY, null);
 			
 			$response = curl_exec($curl);
 			
@@ -146,7 +121,9 @@ class ControllerPaymentukrsib extends Controller {
 				$json['error'] = 'error';
 				 //die('qwe');
 			} else {
-				curl_close($curl);
+                echo urldecode($response);
+                curl_close($curl);
+                die;
 				
 
 				//print_r($response);
