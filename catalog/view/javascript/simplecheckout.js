@@ -663,4 +663,55 @@ jQuery(function(){
             simple_login_close();
         }
     });
+
+    jQuery('#checkout_customer_custom_tin').live('keyup',function(){
+        validateTin();
+    });
+    jQuery('#checkout_customer_custom_date_of_birth').live('keyup',function(){
+        validateTin();
+    });
+
+    function validateTin(){
+        var dateOfbirth = jQuery('#checkout_customer_custom_date_of_birth').val();
+        var tin = jQuery('#checkout_customer_custom_tin').val();
+        var days = tin.substr(0,5);
+        var contr;
+        //alert (date+'    '+tin);
+        if ( tin.match(/\D/) || tin.match(/_/) ) {
+            jQuery('.tin-span').remove();
+            return false;
+        };
+        var inn = tin.match(/(\d)/g);
+        if ( inn.length == 10 )
+        {
+            contr = inn[9] ==  (((
+                -1*inn[0] + 5*inn[1] + 7*inn[2] +
+                    9*inn[3] + 4*inn[4] +  6*inn[5] +
+                    10*inn[6] + 5*inn[7] +  7*inn[8]
+                ) % 11) % 10);
+            if (contr == false){
+                jQuery('.tin-span').remove();
+                jQuery('#checkout_customer_custom_tin').after('<span class="simplecheckout-error-text tin-span">Неверный ИИН</span>');
+            } else {
+                jQuery('.tin-span').remove();
+                if (addDaysToData(parseInt(days)) !== dateOfbirth){
+                    jQuery('#checkout_customer_custom_tin').after('<span class="simplecheckout-error-text tin-span">Дата рождения не соответсвует ИИН</span>');
+                }
+            }
+
+
+        }
+
+        return false;
+    }
+
+    function addDaysToData(day)
+    {
+        data = "31-12-1899";
+        data = data.split('-');
+        data = new Date(data[2], +data[1]-1, +data[0]+day, 0, 0, 0, 0);
+        data = [data.getFullYear(),data.getMonth()+1,data.getDate()];
+        data = data.join('-').replace(/(^|\-)(\d)(?=\-)/g,"$10$2");
+        return data
+    }
 });
