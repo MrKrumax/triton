@@ -514,8 +514,7 @@ class ControllerModuleFilterPro extends Controller {
 				'brand' => $filterpro_setting['brand_display'] ? $product['manufacturer'] : false,
 				'location' => $filterpro_setting['location_display'] ? $product['location'] : false,
 				'upc' => $filterpro_setting['upc_display'] ? $product['upc'] : false,
-				'stock' => $filterpro_setting['stock_display'] ? $rstock : false,
-
+				'stock' => $filterpro_setting['stock_display'] ? $rstock : $rstock,
 				'product_id' => $product['product_id'],
 				'image' => $image,
 				'thumb' => $image,

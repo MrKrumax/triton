@@ -16,6 +16,6 @@ $_['pds_upc']        = 'UPC:';
 $_['pds_location']   = 'Location:';
 $_['pds_stock']      = 'Наличие:';
 
-$_['text_instock']      	= 'В наличии';
+$_['text_instock']      	= 'Есть в наличии';
 
 ?>

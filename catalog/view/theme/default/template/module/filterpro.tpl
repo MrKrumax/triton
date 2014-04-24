@@ -336,6 +336,10 @@
   <tr>
     <td ><div class="name"><a href="${href}">${name}</a></div></td>
     <td width="125px" style="text-align:right;color:#666666; font-size:11px">код товара: ${sku}</td>
+
+  </tr>
+  <tr>
+    <td colspan="2"><span class="stock" style="float:right;"><?php echo $pds_stock; ?> ${stock}</span></td>
   </tr>
   <tr>
     <td colspan="2">  {{if price}}
@@ -361,7 +365,7 @@
       <div class="cart">
        
         <a onclick="addToCart('${product_id}');" class="button4"><?php echo $button_cart; ?></a>
-        <a onclick="addToCart('${product_id}');" class="button3">Купить в кредит</a>
+        <a onclick="addToCartOnCredit('${product_id}');" class="button3">Купить в кредит</a>
         
       </div>  <div class="compare"><a onclick="addToCompare('${product_id}');"><?php echo $button_compare; ?></a></div>
           
