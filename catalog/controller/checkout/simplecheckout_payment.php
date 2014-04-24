@@ -180,7 +180,7 @@ class ControllerCheckoutSimpleCheckoutPayment extends Controller {
         }
         
         if (!empty($this->data['payment_methods'])) {
-            $first_method = reset($this->data['payment_methods']);
+            //$first_method = reset($this->data['payment_methods']);
         }
         
         if (!empty($first_method) && ($simple_payment_methods_hide || ($simple_payment_view_autoselect_first && $this->data['checked_code'] == ''))) {
@@ -205,7 +205,7 @@ class ControllerCheckoutSimpleCheckoutPayment extends Controller {
         $this->data['text_payment_address'] = $this->language->get('text_payment_address');
         $this->data['error_no_payment'] = sprintf($this->language->get('error_no_payment'), $this->url->link('information/contact'));
         $this->data['text_checkout_payment_method'] = $this->language->get('text_checkout_payment_method');        
-        
+
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/simplecheckout_payment.tpl')) {
             $this->template = $this->config->get('config_template') . '/template/checkout/simplecheckout_payment.tpl';
         } else {

@@ -260,8 +260,12 @@ function getURLVar(urlVarName) {
 
 	return urlVarValue;
 
-} 
+}
 
+function addToCartOnCredit(product_id){
+    addToCart(product_id);
+    $.cookie('payment_method', 'ukrsib',{path : '/'});
+}
 
 
 function addToCart(product_id, quantity) {
