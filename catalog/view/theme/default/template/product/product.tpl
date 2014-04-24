@@ -257,7 +257,7 @@
           &nbsp;
           <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button4" />
            &nbsp;
-           <input type="button" onclick="addToCart('<?php echo $product_id; ?>');" value="купить в кредит" id="button-cart" class="button3" />
+           <input type="button" onclick="addToCartOnCredit('<?php echo $product_id; ?>');" value="купить в кредит" id="button-cart" class="button3" />
         </div>
  <?       } ?>
         <div class="compare">
@@ -287,7 +287,11 @@
       <?php } ?>
     </div>
     </div>
-  
+    <div class="note">
+        Цвет или оттенок изделия на фотографии может отличаться от реального.</br>
+        Характеристики и комплектация товара могут изменятся производителем без уведомления.</br>
+        Магазин не несет ответственности за изменения, внесенные производителем.
+    </div>
   <div id="tabs" class="htabs">
   
   <?php if ($attribute_groups) { ?>

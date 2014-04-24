@@ -9567,7 +9567,7 @@ line-height:30px;
 
 
 
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 
 
 
@@ -16006,4 +16006,9 @@ padding: 0 0 30px 0;
 .children-sub-category
 {
 	display: none;
+}
+.note{
+    margin: 0 0 5px 5px;
+    font-size: 11px;
+    color: grey;
 }
