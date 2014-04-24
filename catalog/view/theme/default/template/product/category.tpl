@@ -107,6 +107,7 @@
   </tr>
   <tr>
     <td colspan="2">  <?php if ($product['price']) { ?>
+        <?php echo $product['reward']?>
       <div class="price">
         <?php if (!$product['special']) { ?>
         <?php echo $product['price']; ?>
@@ -125,7 +126,7 @@
       <div class="cart">
         <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button4" />
         
-        <input type="button" value="Купить в кредит" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button3" />
+        <input type="button" value="Купить в кредит" onclick="addToCartOnCredit('<?php echo $product['product_id']; ?>');" class="button3" />
       </div>  <div class="compare"><a onclick="addToCompare('<?php echo $product['product_id']; ?>');"><?php echo $button_compare; ?></a></div></td>
   </tr>
   <tr>

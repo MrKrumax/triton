@@ -399,6 +399,7 @@ class ControllerProductCategory extends Controller
 
 					'sku' => $result['sku'],
 
+                    'reward' => $result['reward'],
 
 					'tax' => $tax,
 
