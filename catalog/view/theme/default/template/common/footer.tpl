@@ -13,8 +13,13 @@
              </div>
              <div id="footer_left_middle">
                  <div id="footer_soc">
-                 <div>Следите за нами в соц. сетях:</div> <a target="_blank" href="http://vk.com/triton.online"><img src="image/site/ico_soc_13.png"></a> <a target="_blank" href="https://www.facebook.com/TritonOnline"><img src="image/site/ico_soc_15.png"></a> <a target="_blank" href="http://www.odnoklassniki.ru/tritononline"><img src="image/site/ico_soc_17.png"></a> <a target="_blank" href="https://plus.google.com/107695828771832104398/"><img src="image/site/ico_soc_19.png"></a>
-                 <a target="_blank" href="http://www.youtube.com/channel/UCmls6m6roIGcoimq0dyG1gQ"><img src="image/site/ico_soc_21.png"></a>
+                 <div>Следите за нами в соц. сетях:</div>
+                     <a target="_blank" href="http://vk.com/triton.online"><img src="image/site/ico_soc_13.png"></a>
+                     <a target="_blank" href="https://www.facebook.com/TritonOnline"><img src="image/site/ico_soc_15.png"></a>
+                     <a target="_blank" href="http://www.odnoklassniki.ru/tritononline"><img src="image/site/ico_soc_17.png"></a>
+                     <a target="_blank" href="https://plus.google.com/107695828771832104398/"><img src="image/site/ico_soc_19.png"></a>
+                     <a target="_blank" href="http://www.youtube.com/channel/UCmls6m6roIGcoimq0dyG1gQ"><img src="image/site/ico_soc_21.png"></a>
+                     <a target="_blank" href="https://twitter.com/TRITONonline1"><img src="image/site/ico_soc_2.png"></a>
                   </div>
                   <div id="footer_search">
                   <div id="search">
