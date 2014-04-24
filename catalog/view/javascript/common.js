@@ -98,9 +98,9 @@ $(document).ready(function() {
 
 	});
 
-	
 
-	
+
+
 
 	/* Ajax Cart */
 
