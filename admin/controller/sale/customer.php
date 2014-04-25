@@ -192,7 +192,20 @@ class ControllerSaleCustomer extends Controller {
     	}
     
     	$this->getList();
-  	}  
+  	}
+
+    public function export() {
+        $outputFile = '../tmp/customers.csv';
+        $this->load->model('sale/customer');
+        $customerData = $this->model_sale_customer->getCustomers();
+        $customerCsv  = $this->prepareCsv($customerData);
+
+        if (file_put_contents($outputFile, $customerCsv)){
+            $this->redirect($outputFile);
+        }else{
+            echo "couldn't write to the file";
+        }
+    }
 	
 	public function approve() {
 		$this->load->language('sale/customer');
@@ -386,6 +399,7 @@ class ControllerSaleCustomer extends Controller {
 		$this->data['approve'] = $this->url->link('sale/customer/approve', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->data['insert'] = $this->url->link('sale/customer/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
 		$this->data['delete'] = $this->url->link('sale/customer/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['export_customers'] = $this->url->link('sale/customer/export', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$this->data['customers'] = array();
 
@@ -1354,5 +1368,27 @@ class ControllerSaleCustomer extends Controller {
 
 		$this->response->setOutput(json_encode($json));		
 	}
+
+    private function prepareCsv($customerData)
+    {
+        $headersCsv = array();
+        $headersCsv[] = 'ФИО';
+        $headersCsv[] = 'Телефон';
+        $headersCsv[] = 'Ел. адрес';
+
+        $dataRender = array();
+        foreach ($customerData as $data){
+            $rowCsvArr = array(
+                '"' . $data['name'] . '"',
+                $data['telephone'],
+                '"' . $data['email'] . '"',
+            );
+            $dataRender[] = join(';', $rowCsvArr);
+        }
+
+        $headersCsv = join(';', $headersCsv);
+        $dataRender = array_merge(array($headersCsv), $dataRender);
+        return join("\n", $dataRender);
+    }
 }
 ?>
