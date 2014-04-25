@@ -195,13 +195,14 @@ class ControllerSaleCustomer extends Controller {
   	}
 
     public function export() {
+        $fileLink = HTTP_CATALOG . 'tmp/customers.csv';
         $outputFile = '../tmp/customers.csv';
         $this->load->model('sale/customer');
         $customerData = $this->model_sale_customer->getCustomers();
         $customerCsv  = $this->prepareCsv($customerData);
 
         if (file_put_contents($outputFile, $customerCsv)){
-            $this->redirect($outputFile);
+            $this->redirect($fileLink);
         }else{
             echo "couldn't write to the file";
         }
