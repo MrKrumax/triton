@@ -123,7 +123,7 @@ class ControllerPaymentukrsib extends Controller {
 			} else {
                 echo urldecode($response);
                 curl_close($curl);
-                die;
+                //die;
 				
 
 				//print_r($response);
@@ -135,7 +135,7 @@ class ControllerPaymentukrsib extends Controller {
 				//{
 					$this->model_checkout_order->confirm($this->session->data['order_id'], $this->config->get('ukrsib_order_status_id'));
 					//echo var_dump($response);
-					$json['redirect'] = $response;
+					$json['redirect'] = $this->url->link('catalog/blog');
 					//die('qweqweqe');
 				//}		
 			}		
