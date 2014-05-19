@@ -12,7 +12,7 @@ class ControllerRecordBlog extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'p.sort_order';
+			$sort = 'p.date_added';
 		}
 
 		if (isset($this->request->get['order'])) {
@@ -111,7 +111,7 @@ class ControllerRecordBlog extends Controller {
                         function truncate_words($text, $limit=200)
                                                 {
                                                         $text=mb_substr($text,0,$limit);
-                                                        /*если не пустая обрезаем до  последнего  пробела*/
+                                                        /*пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
                                                         if(mb_substr($text,mb_strlen($text)-1,1) && mb_strlen($text)==$limit)
                                                         {
                                                                 $textret=mb_substr($text,0,mb_strlen($text)-mb_strlen(strrchr($text,' ')));

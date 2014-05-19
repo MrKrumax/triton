@@ -126,8 +126,8 @@ class ControllerModuleBlog extends Controller {
 				'limit'              => $this->data['limit'],
 				'start' => 0,
 				'filter_blog_id' => $blog_id,
-				'sort'               => 'p.sort_order',
-				'order'              => 'ASC',
+				'sort'               => 'p.date_added',
+				'order'              => 'DESC',
 				//'start'              => ($page - 1) * $limit,
 				
 				
@@ -139,7 +139,7 @@ class ControllerModuleBlog extends Controller {
 			
 			$results = $this->model_catalog_record->getRecords($data);
 
-foreach ($results as $result) {
+                foreach ($results as $result) {
 				if ($result['image']) {
 					  $foto = $this->model_tool_image->resize($result['image'], $this->data['img_width'], $this->data['img_height']);
 				} else {
