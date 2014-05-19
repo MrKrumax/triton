@@ -48,7 +48,7 @@
         <?php //if ($meta_description) { ?></br>
         <?php //echo $meta_description; ?>
         <?php //} ?>
-        
+
          <?php if ($price && $price > 0) { ?>
       <div class="price"><span class="text_price"><?php echo $text_price; ?></span>
         <?php if (!$special) { ?>
@@ -73,16 +73,16 @@
         <?php } ?>
       </div>
       <?php }else{ ?>		<div class="price" onclick="utt();"><span class="text_price ask">Запросить цену</span></div><div style="    position: fixed;    background: #000;    opacity: 0.5;    width: 100%;    height: 100%;    z-index: 998;	display:none;	top:0;	left:0;" id="overlay_utt"></div><div id="price_utt" class="modal in" style="width: 535px;display: none;position: fixed;top: 10%;left: 50%;z-index: 1050;margin-left: -280px;background-color: #ffffff;border: 1px solid rgba(0, 0, 0, 0.3);*border: 1px solid #999;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);-webkit-background-clip: padding-box;-moz-background-clip: padding-box;background-clip: padding-box;outline: none;">	<div class="modal-body" style="max-height: 430px;position: relative;overflow-y: auto;padding: 15px;">		<form class="form-horizontal" onsubmit="utt_post(this); return false;" method="post" style="margin: 0 0 20px;">			<fieldset style="padding: 0;margin: 0;border: 0;">				<legend style="display: block;width: 100%;padding: 0;margin-bottom: 20px;font-size: 21px;line-height: 40px;color: #333333;border: 0;border-bottom: 1px solid #e5e5e5;">Заполните Ваши контактные данные</legend>				<div class="control-group input-prepend" style="display: inline-block;margin-bottom: 20px;vertical-align: middle;font-size: 0;white-space: nowrap;*display: inline;*zoom: 1;">					<label class="control-label" for="user_name" style="cursor: inherit;font-size: 14px;font-weight: normal;line-height: 20px;display: block;margin-bottom: 5px;float: left;width: 160px;padding-top: 5px;text-align: right;">						<b>Имя</b>					</label>					<div class="controls" style="*display: inline-block;*padding-left: 20px;margin-left: 180px;*margin-left: 0;">						<span class="add-on" style="display: inline-block;width: auto;height: 20px;min-width: 16px;padding: 4px 5px;font-size: 14px;font-weight: normal;line-height: 20px;text-align: center;text-shadow: 0 1px 0 #ffffff;background-color: #eeeeee;border: 1px solid #ccc;vertical-align: top;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;margin-right: -1px;">						<i class="icon-user" style="background-position: -168px 0;"></i>						</span><input type="text" value="" class="input-xlarge" id="user_name" rel="popover" name="user_name" placeholder="Укажите Ваши имя и фамилию" data-content="Укажите Ваши имя и фамилию" data-original-title="Полное имя" style="font-size: 14px;font-weight: normal;line-height: 20px;font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;width: 270px;margin-left: 0;display: inline-block;height: 20px;padding: 4px 6px;margin-bottom: 0;color: #555555;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;vertical-align: middle;background-color: #ffffff;border: 1px solid #cccccc;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);-webkit-transition: border linear .2s, box-shadow linear .2s;-moz-transition: border linear .2s, box-shadow linear .2s;-o-transition: border linear .2s, box-shadow linear .2s;transition: border linear .2s, box-shadow linear .2s;position: relative;*margin-left: 0;*display: inline;*zoom: 1;">					</div>				</div>				<div class="control-group input-prepend" style="display: inline-block;margin-bottom: 20px;vertical-align: middle;font-size: 0;white-space: nowrap;*display: inline;*zoom: 1;">					<label class="control-label" for="user_phone" style="cursor: inherit;font-size: 14px;font-weight: normal;line-height: 20px;display: block;margin-bottom: 5px;float: left;width: 160px;padding-top: 5px;text-align: right;">						<b>Телефон</b>					</label>					<div class="controls" style="*display: inline-block;*padding-left: 20px;margin-left: 180px;*margin-left: 0;">						<span class="add-on" style="display: inline-block;width: auto;height: 20px;min-width: 16px;padding: 4px 5px;font-size: 14px;font-weight: normal;line-height: 20px;text-align: center;text-shadow: 0 1px 0 #ffffff;background-color: #eeeeee;border: 1px solid #ccc;vertical-align: top;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;margin-right: -1px;">						<i class="icon-pencil" style="background-position: 0 -72px;"></i>									</span><input type="text" class="input-xlarge" id="user_phone" rel="popover" name="user_phone" placeholder="Какой у Вас номер телефона?" data-content="Какой у Вас номер телефона? Зная Ваш номер телефона, мы можем связаться с Вами для уточнения деталей заказа" data-original-title="Телефон" style="font-size: 14px;font-weight: normal;line-height: 20px;font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;width: 270px;margin-left: 0;display: inline-block;height: 20px;padding: 4px 6px;margin-bottom: 0;color: #555555;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;vertical-align: middle;background-color: #ffffff;border: 1px solid #cccccc;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);-webkit-transition: border linear .2s, box-shadow linear .2s;-moz-transition: border linear .2s, box-shadow linear .2s;-o-transition: border linear .2s, box-shadow linear .2s;transition: border linear .2s, box-shadow linear .2s;position: relative;*margin-left: 0;*display: inline;*zoom: 1;">					</div>				</div>				<div class="control-group input-prepend" style="display: inline-block;margin-bottom: 20px;vertical-align: middle;font-size: 0;white-space: nowrap;*display: inline;*zoom: 1;">					<label class="control-label" for="user_email" style="cursor: inherit;font-size: 14px;font-weight: normal;line-height: 20px;display: block;margin-bottom: 5px;float: left;width: 160px;padding-top: 5px;text-align: right;">						<b>Эл. почта</b>					</label>					<div class="controls" style="*display: inline-block;*padding-left: 20px;margin-left: 180px;*margin-left: 0;">						<span class="add-on" style="display: inline-block;width: auto;height: 20px;min-width: 16px;padding: 4px 5px;font-size: 14px;font-weight: normal;line-height: 20px;text-align: center;text-shadow: 0 1px 0 #ffffff;background-color: #eeeeee;border: 1px solid #ccc;vertical-align: top;-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;margin-right: -1px;">						<i class="icon-envelope" style="background-position: -72px 0;"></i>						</span><input type="text" value="" class="input-xlarge" id="user_email" rel="popover" name="user_email" placeholder="Какой у Вас адрес электронной почты?" data-content="Какой у Вас адрес электронной почты? Зная Ваш адрес электронной почты, мы можем связаться с Вами для уточнения деталей заказа и Вы сможете получить на электронную почту копию запроса с заказом" data-original-title="Email" style="font-size: 14px;font-weight: normal;line-height: 20px;font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;width: 270px;margin-left: 0;display: inline-block;height: 20px;padding: 4px 6px;margin-bottom: 0;color: #555555;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;vertical-align: middle;background-color: #ffffff;border: 1px solid #cccccc;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);-webkit-transition: border linear .2s, box-shadow linear .2s;-moz-transition: border linear .2s, box-shadow linear .2s;-o-transition: border linear .2s, box-shadow linear .2s;transition: border linear .2s, box-shadow linear .2s;position: relative;*margin-left: 0;*display: inline;*zoom: 1;">					</div>				</div>				<input type="hidden" name="link" value="" style="font-size: 14px;font-weight: normal;line-height: 20px;font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;width: 206px;margin-left: 0;display: inline-block;*display: inline;*zoom: 1;margin-bottom: 0;vertical-align: middle;">							</fieldset>		</form>	</div>	<div class="modal-footer" style="padding: 14px 15px 15px;margin-bottom: 0;text-align: right;background-color: #f5f5f5;border-top: 1px solid #ddd;-webkit-border-radius: 0 0 6px 6px;-moz-border-radius: 0 0 6px 6px;border-radius: 0 0 6px 6px;-webkit-box-shadow: inset 0 1px 0 #ffffff;-moz-box-shadow: inset 0 1px 0 #ffffff;box-shadow: inset 0 1px 0 #ffffff;*zoom: 1;">		<button class="btn btn-large btn-danger" onclick="$('#price_utt').find('form').find('input[name=link]').val(window.location.href);$('#price_utt').find('form').submit()" style="font-size: 17.5px;font-weight: normal;line-height: 20px;font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;display: inline-block;*display: inline;*zoom: 1;padding: 11px 19px;margin-bottom: 0;text-align: center;vertical-align: middle;cursor: pointer;color: #ffffff;text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);background-color: #da4f49;background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);background-repeat: repeat-x;filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*background-color: #bd362f;border: 1px solid #cccccc;*border: 0;border-bottom-color: #b3b3b3;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;*margin-left: .3em;-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);*padding-top: 7px;*padding-bottom: 7px;">Сделать запрос</button>	</div></div><script>$.fn.serializeObject = function(){    var o = {};    var a = this.serializeArray();    $.each(a, function() {        if (o[this.name] !== undefined) {            if (!o[this.name].push) {                o[this.name] = [o[this.name]];            }            o[this.name].push(this.value || '');        } else {            o[this.name] = this.value || '';        }    });    return o;};function utt(){	$("#overlay_utt").on("click", function(){		$(this).hide();		$("#price_utt").hide();	}).show();	$("#price_utt").show();}function utt_post(form){	$.post('/index.php?route=record/blog', $(form).serializeObject());	alert('Запрос отправлен!');	window.location.reload();}</script>		<?php } ?>
-      
-      
-        
+
+
+
         </td>
-    <td valign="top" align="right"> 
-    
+    <td valign="top" align="right">
+
     <?php if ($price > '1999') { ?>
-   <img src="image/site/deliveri_no.jpg" id="image" /> 
+   <img src="image/site/deliveri_no.jpg" id="image" />
     <?php } ?>
-    
+
     <!-- <?php  if($informations) { ?>
     <a href="<?php echo $informations; ?>"  class="colorbox" rel="colorbox1"><img src="image/site/deliveri_<?=$information_id?>.jpg" id="image" /></a>
    <? } else {?>
@@ -92,16 +92,16 @@
   </tr>
 </table>
 </div>
-      
-       
-     
+
+
+
       <?php if ($options) { ?>
-      
-      
-    
-      
+
+
+
+
       <div class="options">
-          <a href="/index.php?route=information/information&information_id=8&design=no"  class="colorbox" rel="colorbox1">Условия гарантии</a> 
+          <a href="/index.php?route=information/information&information_id=8&design=no"  class="colorbox" rel="colorbox1">Условия гарантии</a>
         <br /> <br />
         <?php foreach ($options as $option) { ?>
         <?php if ($option['type'] == 'select') { ?>
@@ -245,11 +245,11 @@
         <?php } ?>
       </div>
       <?php } ?>
-      
 
-      
+
+
       <div class="cart">
-      
+
             <?php if ($price && $price > 0) {  ?>
         <div>
           <input type="hidden" name="quantity" size="2" value="<?php echo $minimum; ?>" />
@@ -280,8 +280,8 @@
           </div>
             <!--<a class="addthis_button_print"></a>-->
 
-          <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script> 
-          <!-- AddThis Button END --> 
+          <script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script>
+          <!-- AddThis Button END -->
         </div>
       </div>
       <?php } ?>
@@ -293,24 +293,27 @@
         Магазин не несет ответственности за изменения, внесенные производителем.
     </div>
   <div id="tabs" class="htabs">
-  
-  <?php if ($attribute_groups) { ?>
-    <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
-    <?php } ?>
-    <?php if ($description) { ?>
+
+      <?php if ($description) { ?>
       <a href="#tab-description"><?php echo $tab_description; ?></a>
+      <?php } ?>
+
+    <?php if ($attribute_groups) { ?>
+        <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
     <?php } ?>
+
      <?php if ($video) { ?>
     <a href="#tab-video"><?php echo $tab_video; ?></a>
     <?php } ?>
+
     <?php if ($review_status) { ?>
-    <a href="#tab-review"><?php echo $tab_review; ?></a>
+        <a href="#tab-review"><?php echo $tab_review; ?></a>
     <?php } ?>
-    
-    
-    
+
+
+
   </div>
- 
+
   <?php if ($attribute_groups) { ?>
   <div id="tab-attribute" class="tab-content">
     <table class="attribute">
