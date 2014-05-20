@@ -17,7 +17,7 @@
                      <a target="_blank" href="http://vk.com/triton.online"><img src="image/site/ico_soc_13.png"></a>
                      <a target="_blank" href="https://www.facebook.com/TritonOnline"><img src="image/site/ico_soc_15.png"></a>
                      <a target="_blank" href="http://www.odnoklassniki.ru/tritononline"><img src="image/site/ico_soc_17.png"></a>
-                     <a target="_blank" href="https://plus.google.com/114703897637358339562/"><img src="image/site/ico_soc_19.png"></a>
+                     <a target="_blank" rel="publisher" href="https://plus.google.com/114703897637358339562/"><img src="image/site/ico_soc_19.png"></a>
                      <a target="_blank" href="http://www.youtube.com/channel/UCmls6m6roIGcoimq0dyG1gQ"><img src="image/site/ico_soc_21.png"></a>
                      <a target="_blank" href="https://twitter.com/TRITONonline1"><img src="image/site/ico_soc_2.png"></a>
                   </div>
