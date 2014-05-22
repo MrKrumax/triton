@@ -36,7 +36,7 @@
 
              <div id="footer_left_dawn">
              <div id="powered"><?php echo $powered; ?></div>
-            
+             <div class="google_link"> <a href="https://plus.google.com/114703897637358339562" rel="publisher">Google+</a> </div>
              </div> 
  
         </div> 

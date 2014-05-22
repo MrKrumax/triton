@@ -24,26 +24,26 @@
          <?php if ($record['foto']) { ?>
     <div class="image" ><img src="<?php echo $record['foto']; ?>" alt="<?php echo $heading_title; ?>" /></div>
     <?php } ?>
-
+    
     <a href="<?php echo $record['href']; ?>"  class="button">подробнее</a>
-    </div>
-
-       <div class="record-one-right_s">
+    </div> 
+    
+       <div class="record-one-right_s">  
         <div class="name"><a href="<?php echo $record['href']; ?>" ><?php echo $record['name']; ?></a></div>
-        <div class="description"><?php echo $record['description']; ?>
-
+        <div class="description"><?php echo $record['description']; ?> 
+        
         </div>
         <div class="rating">
         <img src="/catalog/view/theme/default/image/stars-<?php echo  $record['rating']; ?>.png"  alt="<?php echo  $record['comments']; ?>"  />
        </div>
        </div>
-
-
+      
+      
     </div>
-
- <?php } ?>
-
-
+ 
+ <?php } ?> 
+ 
+ 
  </li>
 
  <?php } ?>

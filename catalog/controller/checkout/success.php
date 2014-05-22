@@ -7,26 +7,20 @@ class ControllerCheckoutSuccess extends Controller {
 		// OCU TurboSMS [BEGIN]
 	$this->load->model('setting/extension');
 		
-		if ( isset($this->session->data['order_id']) && ( ! empty($this->session->data['order_id']))  ) {
-			$this->session->data['last_order_id'] = $this->session->data['order_id'];
-			
-			
-			  $this->data['telephone']=$this->session->data['telephone'];
-		 	 $this->data['firstname']=$this->session->data['firstname'];
-		 	 $this->data['total']=$this->session->data['total'];
-			 
-			 
-			 
-			 $vowels = array("(", ")","-","+", " ");
-//$onlyconsonants = str_replace($vowels, "", "Hello World of PHP");
-			 $tel_costumer = str_replace($vowels, "", $this->data['telephone']);
-			 
-			 
+	if ( isset($this->session->data['order_id']) && ( ! empty($this->session->data['order_id']))  ) {
+		$this->session->data['last_order_id'] = $this->session->data['order_id'];
 
-        
+		$this->data['telephone']=$this->session->data['telephone'];
+		$this->data['firstname']=$this->session->data['firstname'];
+		$this->data['total']=$this->session->data['total'];
+
+		$vowels = array("(", ")","-","+", " ");
+		//$onlyconsonants = str_replace($vowels, "", "Hello World of PHP");
+		$tel_costumer = str_replace($vowels, "", $this->data['telephone']);		 		 
+      
             // OCU TurboSMS [BEGIN]
-       $order_id = $this->session->data['order_id'];
-       $sms_text = str_replace(array('{ID}', '{DATE}', '{TIME}', '{SUM}', '{PHONE}','{NAME}'),
+        $order_id = $this->session->data['order_id'];
+        $sms_text = str_replace(array('{ID}', '{DATE}', '{TIME}', '{SUM}', '{PHONE}','{NAME}'),
          array($order_id, date('d.m.Y'), date('H:i'), floatval( $this->data['total']),  $this->data['telephone'], $this->data['firstname']),
          $this->config->get('config_sms_message'));
 		 $sms_text_custumer = 'Ваш заказ №'.$order_id.'. В ближайшее время мы с Вами свяжимся www.tritononline.com.ua';
@@ -45,18 +39,12 @@ class ControllerCheckoutSuccess extends Controller {
 			}
 		}
 
-			
-			
-			
-			if (true === $this->ocu_turbo_sms_init() && $this->config->get('ocu_turbo_sms_admin_new_order')) {
-                $this->ocu_turbo_sms_gateway->send($tel_costumer,$sms_text_custumer);
-            }
-			
-            // OCU TurboSMS [END]
-        
-      		
-			
+		if (true === $this->ocu_turbo_sms_init() && $this->config->get('ocu_turbo_sms_admin_new_order')) {
+			$this->ocu_turbo_sms_gateway->send($tel_costumer,$sms_text_custumer);
 		}
+		
+        // OCU TurboSMS [END]
+	}
 	// OCU TurboSMS [BEGIN]
 	
 	

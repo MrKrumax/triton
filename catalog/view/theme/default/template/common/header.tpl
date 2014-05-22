@@ -28,7 +28,7 @@
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/colorbox/colorbox.css" media="screen" />
 <!-- <link rel="stylesheet" type="text/css" href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" media="screen" />-->
 <script type="text/javascript" src="catalog/view/javascript/jquery/tabs.js"></script><script type="text/javascript" src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/common2.js"></script>
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>

@@ -3356,7 +3356,7 @@ background: url(../image/bul_03.jpg) 0px 8px no-repeat;
 
 
 
-	font-size:11px;
+	font-size:12px;
 
 
 
@@ -15689,6 +15689,13 @@ color:#afadad;
 
 
 
+}
+.google_link{
+    text-align: left;
+}
+
+.google_link a{
+    color:#afadad;
 }
 
 

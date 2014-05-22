@@ -255,7 +255,7 @@
           <input type="hidden" name="quantity" size="2" value="<?php echo $minimum; ?>" />
           <input type="hidden" name="product_id" size="2" value="<?php echo $product_id; ?>" />
           &nbsp;
-          <input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button4" />
+          <input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product_id; ?>');" id="button-cart" class="button4" />
            &nbsp;
            <input type="button" onclick="addToCartOnCredit('<?php echo $product_id; ?>');" value="купить в кредит" id="button-cart" class="button3" />
         </div>
@@ -436,7 +436,7 @@ $('.colorbox').colorbox({
 //--></script> 
 <script type="text/javascript"><!--
 $('#button-cart').bind('click', function() {
-	$.ajax({
+	/*$.ajax({
 		url: 'index.php?route=checkout/cart/add',
 		type: 'post',
 		data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
@@ -462,7 +462,7 @@ $('#button-cart').bind('click', function() {
 				$('html, body').animate({ scrollTop: 0 }, 'slow'); 
 			}	
 		}
-	});
+	});*/
 });
 //--></script>
 <?php if ($options) { ?>

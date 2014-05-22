@@ -88,7 +88,7 @@ class ControllerPaymentukrsib extends Controller {
 			error_reporting(E_ALL);
 			ini_set('show_errors', true);
 
-            $url = 'ratanet-backup.ukrsibbank.com';
+            $url = 'https://e-ratanet.ukrsibbank.com/coliseum/jsp/ecommerce';
 			$header  = 'Host: ' . $url . "\r\n";
 
 			$header .= 'Accept	text/plain, */*; q=0.01' . "\r\n";
@@ -99,7 +99,7 @@ class ControllerPaymentukrsib extends Controller {
 
 			$curl = curl_init();
 
-            curl_setopt($curl, CURLOPT_URL, 'https://ratanet-backup.ukrsibbank.com/coliseum/jsp/ecommerce');
+            curl_setopt($curl, CURLOPT_URL, 'https://e-ratanet.ukrsibbank.com/coliseum/jsp/ecommerce');
             curl_setopt($curl, CURLOPT_FAILONERROR,true);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
             curl_setopt($curl, CURLOPT_POST, true);
@@ -123,7 +123,8 @@ class ControllerPaymentukrsib extends Controller {
 			} else {
                 echo urldecode($response);
                 curl_close($curl);
-                //die;
+				
+               
 				
 
 				//print_r($response);
@@ -135,7 +136,7 @@ class ControllerPaymentukrsib extends Controller {
 				//{
 					$this->model_checkout_order->confirm($this->session->data['order_id'], $this->config->get('ukrsib_order_status_id'));
 					//echo var_dump($response);
-					$json['redirect'] = $this->url->link('catalog/blog');
+					$json['redirect'] = $response;
 					//die('qweqweqe');
 				//}		
 			}		
