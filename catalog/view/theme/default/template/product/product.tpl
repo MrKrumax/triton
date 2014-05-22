@@ -272,11 +272,12 @@
         <div class="share"><!-- AddThis Button BEGIN -->
           <div class="addthis_default_style">
               <!--<a class="addthis_button_compact"><?php echo $text_share; ?></a>-->
-              <a class="addthis_button_odnoklassniki_ru"></a>
+              <a class="addthis_button_facebook"></a>
               <a class="addthis_button_vk"></a>
               <a class="addthis_button_twitter"></a>
-            <a class="addthis_button_facebook"></a>
-            <a class="addthis_button_email"></a>
+              <a class="addthis_button_google_plusone_share"</a>
+              <a class="addthis_button_odnoklassniki_ru"></a>
+              <a class="addthis_button_email"></a>
           </div>
             <!--<a class="addthis_button_print"></a>-->
 
