@@ -227,7 +227,7 @@ class ControllerModuleCSVPricePro extends Controller {
 		if(!isset($this->data['csv_setting']['minimum'])) $this->data['csv_setting']['minimum'] = 1;
 		if(!isset($this->data['csv_setting']['subtract'])) $this->data['csv_setting']['subtract'] = 0;
 		if(!isset($this->data['csv_setting']['stock_status_id'])) $this->data['csv_setting']['stock_status_id'] = 0;
-		if(!isset($this->data['csv_setting']['shipping'])) $this->data['csv_setting']['shipping'] = 0;
+		if(!isset($this->data['csv_setting']['shipping'])) $this->data['csv_setting']['shipping'] = 1;
 		if(!isset($this->data['csv_setting']['length_class_id'])) $this->data['csv_setting']['length_class_id'] = 0;
 		if(!isset($this->data['csv_setting']['weight_class_id'])) $this->data['csv_setting']['weight_class_id'] = 0;
 		if(!isset($this->data['csv_setting']['status'])) $this->data['csv_setting']['status'] = 1;
@@ -606,7 +606,7 @@ class ControllerModuleCSVPricePro extends Controller {
 			'minimum' => 1,
 			'subtract' => 0,
 			'stock_status_id' => 0,
-			'shipping' => 0,
+			'shipping' => 1,
 			'length_class_id' => 0,
 			'weight_class_id' => 0,
 			'status' => 1,

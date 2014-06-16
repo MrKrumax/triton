@@ -15090,86 +15090,16 @@ height:40px
 
 
 #footer_soc{
-
-
-
-
-
-
-
 width:330px;
-
-
-
-
-
-
-
 float:left;
-
-
-
-
-
-
-
 padding:8px 0 0 0;
-
-
-
-
-
-
-
 height:19px;
-
-
-
-
-
-
-
 line-height:19px;
-
-
-
-
-
-
-
 color:#afadad;
-
-
-
-
-
-
-
 text-align:left;
-
-
-
-
-
-
-
 vertical-align:top;
-
-
-
-
-
-
-
-display:table-cell
-
-
-
-
-
-
-
-}
+display:table-cell;
+font-size: 12px;}
 
 
 
@@ -15178,37 +15108,9 @@ display:table-cell
 
 
 #footer_soc a, #footer_soc > div{
-
-
-
-
-
-
-
 display:block;
-
-
-
-
-
-
-
 float:left;
-
-
-
-
-
-
-
-padding:0 4px 0 0;
-
-
-
-
-
-
-
+padding:0 3px 0 0;
 }
 
 
