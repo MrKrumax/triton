@@ -87,6 +87,7 @@ class ControllerCatalogCategory extends Controller {
 									
 		$this->data['insert'] = $this->url->link('catalog/category/insert', 'token=' . $this->session->data['token'], 'SSL');
 		$this->data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['generate_meta_desc'] = $this->url->link('catalog/category/generatemetadesc', 'token=' . $this->session->data['token'], 'SSL');
 		
 		if (isset($this->request->get['path'])) {
 			if ($this->request->get['path'] != '') {
@@ -449,5 +450,83 @@ class ControllerCatalogCategory extends Controller {
 
 		return $output;
 	}
+
+    public function generateMetaDesc() {
+        $this->load->language('catalog/category');
+        $this->config->set('meta_desc_cat','+category_name+');
+        $this->data['meta_desc_cat'] = '+category_name+';
+        $this->load->model('catalog/category');
+        $categories = $this->model_catalog_category->getCategories();
+
+        $category_meta_desc = array();
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateMetaGenForm()) {
+            $template = $this->request->post['meta_desc_template'];//'шаблон,шаблон [[category_name]] ,шаблон';
+
+            foreach ($categories as $key => $category) {
+                $name = explode($this->language->get('text_separator'),$category['name']);
+                $name = array_pop($name);
+                $categories[$key]['category_id'] = $category['category_id'];
+                $categories[$key]['name'] = $name;
+                $categories[$key]['meta_desc'] = str_replace( $this->data['meta_desc_cat'],$name,$template);
+
+                $meta_desc = str_replace( $this->data['meta_desc_cat'],$name,$template);
+                $query = "UPDATE " . DB_PREFIX . "category_description SET meta_description ='" . $meta_desc . "' WHERE category_id = '" . $category['category_id'] . "'";
+                $this->db->query($query);
+
+            }
+            //print_r($categories);
+        }
+
+        foreach ($categories as $category) {
+            $category_meta_desc = array_merge($category_meta_desc, $this->model_catalog_category->getCategoryDescriptions($category['category_id']));
+        }
+
+
+        $this->data['category_meta_desc'] = $category_meta_desc;
+        if (!empty($this->request->post['meta_desc_template'])){
+            $this->data['meta_desc_template'] = $this->request->post['meta_desc_template'];
+        }else{
+            $this->data['meta_desc_template'] = 'текст ' .  $this->data['meta_desc_cat'] . ' текст';
+        }
+        if (isset($this->error['meta_desc_template'])) {
+            $this->data['error_meta_desc_template'] = $this->error['meta_desc_template'];
+        } else {
+            $this->data['error_meta_desc_template'] = '';
+        }
+
+        $this->data['action'] = $this->url->link('catalog/category/generatemetadesc', 'token=' . $this->session->data['token'], 'SSL');
+        if (isset($this->error['warning'])) {
+            $this->data['error_warning'] = $this->error['warning'];
+        } else {
+            $this->data['error_warning'] = '';
+        }
+
+        //print_r($categories);
+        $this->template = 'catalog/category_form_meta_generate.tpl';
+        $this->children = array(
+            'common/header',
+            'common/footer'
+        );
+
+        $this->response->setOutput($this->render());
+
+    }
+    private function  validateMetaGenForm(){
+        if ((utf8_strlen($this->request->post['meta_desc_template']) < 14 )) {
+            $this->error['meta_desc_template'] = 'Заполние шаблон';
+        }elseif (strpos($this->request->post['meta_desc_template'], $this->data['meta_desc_cat']) === false ) {
+            $this->error['meta_desc_template'] = 'Введиде в строку идентификатор позиции названия категории (' .  $this->data['meta_desc_cat'] . ')';
+        }
+
+        if ($this->error && !isset($this->error['warning'])) {
+            $this->error['warning'] = $this->language->get('error_warning');
+        }
+
+        if (!$this->error) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 ?>

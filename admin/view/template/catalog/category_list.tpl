@@ -56,6 +56,7 @@
         </table>
       </form>
     </div>
+      <a onclick="location = '<?php echo $generate_meta_desc; ?>';" class="button">Сгенерировать meta-description</a>
   </div>
 </div>
 <?php echo $footer; ?>
